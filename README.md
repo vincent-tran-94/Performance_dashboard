@@ -23,9 +23,9 @@ pip install -r requirements.txt
 ## Analyse des données et import des fichiers CSV
 Ce fichier est un fichier notebook qui permet d'analyser les données sur les performances du rameur 
 Vous devez impérativement installer Python sur votre machine ainsi que les dépendances 
-```
-Select Kernel <Nom de l'environnement virtuel>
-```
+
+*Select Kernel <Nom de l'environnement virtuel>*
+
 ## Lanchement de l'pplication web sur Flask
 Lancer votre application Flask pour démarrer votre serveur 
 ```
