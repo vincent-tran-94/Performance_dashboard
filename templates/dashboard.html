@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Performance Dashboard</h1>
+    <div class="max-speed-info">
+        <h2>Gagnant du participant</h2>
+        <p><strong>Nom du participant :</strong> {{ participant_max_speed }}</p>
+        <p><strong>Vitesse Maximale :</strong> {{ max_speed }} km/h</p>
+        <p><strong>Cadence à la vitesse maximale :</strong> {{ max_cadence }} coups/min</p>
+        <p><strong>Longueur de coup de rame correspondante :</strong> {{ max_length }} m</p>
+    </div>
+    <h2>Sélectionnez des Participants :</h2>
+    <form action="{{ url_for('add_participants') }}" method="POST">
+        <div class="participants-container">
+            <select name="participants" multiple>
+                {% for participant in participants %}
+                    <option value="{{ participant }}" {% if participant in selected_participants %}selected{% endif %}>{{ participant }}</option>
+                {% endfor %}
+            </select>
+            <!-- Zone pour afficher les participants sélectionnés -->
+            <div class="selected-participants">
+                <button type="submit">Ajouter Participants</button>
+                <a href="{{ url_for('remove_participants') }}"><button type="button">Retirer Tous les Participants</button></a>
+                <h3>Participants Sélectionnés :</h3>
+                <ul>
+                    {% for participant in selected_participants %}
+                        <li>{{ participant }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </form>
+
+    <div class="grid-container">
+        <div class="card large">
+            <h2>Temps aux Intervalles de 500m</h2>
+            {{ performance_line_chart_html | safe }}
+        </div>
+        <div class="card large">
+            <h2>Vitesse Moyenne aux Intervalles de 500m</h2>
+            {{ speed_line_chart_html | safe }}
+        </div>
+        <div class="card large">
+            <h2>Comparaison des participants sur les totaux des coups de rames</h2>
+            {{ radar_chart_html | safe }}
+        </div>
+        <div class="card large">
+            <h2>Relation entre Cadence et Longueur de Coup de Rame</h2>
+            {{ cadence_length_scatter_html|safe }}
+        </div>
+    </div>
+</body>
+</html>
