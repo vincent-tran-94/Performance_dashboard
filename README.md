@@ -4,9 +4,9 @@ Projet Sorbonne pour la création d'un dashboard sur l'application Flask pour vi
 La compétition se déroule comme suit : chaque série comporte 4 rameurs qui vont parcourir 2000m virtuels sur leurs machines. Le but est évidemment d'être le plus rapide possible sur ces 2000m. Les données de chaque série sont enregistrées par les machines et recueillies. Les courses ont été paramétrées pour que chaque parcours de 2000m soit divisé en quatre parties de 500m, c'est-à-dire que les statistiques données par les ergomètres sont calculées et restituées tous les 500m. Chaque fichier du zip correspond à une série. 
 
 ## Extraits d'images du Dashboard
-<img src="images_readme/Part_1_dashboard.PNG" width="400"/>
+<img src="images_readme/Part_1_dashboard.PNG"/>
 
-<img src="images_readme/Part_2_dashboard.PNG" width="400"/>
+<img src="images_readme/Part_2_dashboard.PNG"/>
 
 ## Installations à faire 
 - Version Python 3.11.7
