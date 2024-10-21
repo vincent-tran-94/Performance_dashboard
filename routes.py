@@ -8,17 +8,21 @@ def dashboard():
     infos_performance = InfosPerformance.query.all()
     speed_length = SpeedLength.query.all()
 
+    #On sélectionne la liste des participants dans la liste déroulante 
     selected_participants = session.get('selected_participants', [])
     if selected_participants:
         infos_performance = [p for p in infos_performance if p.Participant in selected_participants]
         speed_length = [s for s in speed_length if s.Participant in selected_participants]
 
+    #On trie dans l'ordre alphabétique pour chaque participant
     participants = sorted([p.Participant for p in infos_performance])
 
+    #On appelle tout les visualisations existants à l'utilisation de Plotly
     performance_line_chart_html = create_performance_chart(infos_performance)
     radar_chart_html = create_radar_chart(infos_performance, participants)
     speed_line_chart_html = create_speed_chart(speed_length)
-    cadence_length_scatter_html, best_speed_info = create_scatter_plot(infos_performance, speed_length)
+    cadence_length_scatter_html = create_scatter_plot(infos_performance, speed_length)
+    best_speed_info = get_best_speed_info(infos_performance, speed_length)
 
     return render_template(
         'dashboard.html', 
@@ -28,15 +32,17 @@ def dashboard():
         cadence_length_scatter_html=cadence_length_scatter_html,
         speed_line_chart_html=speed_line_chart_html,
         selected_participants=selected_participants,
-        **best_speed_info 
+        **best_speed_info  #Retourne un dictionnaire avec tout les clés contenant  'participant_max_speed', max_speed','max_cadence' et 'max_length'
     )
 
 
 # Route pour ajouter des participants à la session
 @app.route('/add_participants', methods=['POST'])
 def add_participants():
+    
     # Récupérer la liste actuelle des participants sélectionnés
     selected_participants = session.get('selected_participants', [])
+
     # Ajouter les nouveaux participants à la liste existante
     new_participants = request.form.getlist('participants')
     selected_participants.extend(new_participants)  # Ajouter les nouveaux participants

@@ -19,8 +19,6 @@ class InfosPerformance(db.Model):
     AvgCadenceMin500mP4 = db.Column(db.Float)
     Strokes500mP4 = db.Column(db.Integer)
 
-    def __repr__(self):
-        return f'<InfosPerformance {self.Participant}>'
 
 class SpeedLength(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +33,3 @@ class SpeedLength(db.Model):
     StrokeLengh500mP3 = db.Column(db.Float)
     AvgSpeedKmh500mP4 = db.Column(db.Float)
     StrokeLengh500mP4 = db.Column(db.Float)
-
-    def __repr__(self):
-        return f'<SpeedLength {self.Participant}>'
